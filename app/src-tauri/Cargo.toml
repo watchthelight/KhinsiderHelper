@@ -1,0 +1,37 @@
+[package]
+name = "khinsider-helper"
+version = "1.0.0"
+edition = "2021"
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-shell = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+reqwest = { version = "0.12", features = ["cookies", "json", "stream", "native-tls"], default-features = false }
+tokio = { version = "1", features = ["full"] }
+url = "2"
+sanitize-filename = "0.6"
+futures = "0.3"
+log = "0.4"
+dirs-next = "2"
+scraper = "0.22"
+rusqlite = { version = "0.33", features = ["bundled"] }
+aes-gcm = "0.10"
+base64 = "0.22"
+urlencoding = "2"
+zip = { version = "2", default-features = false, features = ["deflate"] }
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.59", default-features = false, features = [
+    "Win32_System_Power",
+    "Win32_Foundation",
+    "Win32_Security_Cryptography",
+] }
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[features]
+default = ["custom-protocol"]
+custom-protocol = ["tauri/custom-protocol"]
